@@ -1,6 +1,7 @@
+package R248;
 
-
-import static java.util.Arrays.deepToString;
+import static java.util.Arrays.*;
+import static java.lang.Math.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,32 +10,72 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.StringTokenizer;
  
-public class D {
+public class C {
     private static final boolean isDebug = false;
+
+    int[] dx = {1, 0, -1, 0};
+    int[] dy = {0, -1, 0, 1};
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
 
-        Scanner sc = new Scanner(System.in);
+        int N = readBufInt();
+        int M = readBufInt();
+        int K = readBufInt();
         
-        int N = sc.nextInt();
+        int[][] map = new int [N + 1][M + 1];
         
-        double[] p = new double[N];
-        
-        Arrays.sort(p);
-        
-        double res = p[N - 1];
-        if (res >= 0.5d) {
-            pw.println(res);
+        for (int i = 1; i <= K; i++) {
+            if (i== K) {
+                int res = N * M - 2 * (K - 1);
+                pw.print(res + " ");
+                int y = i;
+                int x = 1;
+                int j = 0;
+                boolean isDown = true;
+                for (; j < res && x <= M; ) {
+                    for (; x <=M ; x++) {
+                        while(y >= 1 && y <= N) {
+
+                            if (map[y][x] == 0) {
+                                if (j + 1== res) {
+                                    pw.println(y + " " + x);
+                                } else {
+                                    pw.print(y + " " + x + " ");
+                                }
+                                map[y][x] = 1;
+                                j++;
+                            }
+                            if (isDown) {
+                                if (y >= N || map[y + 1][x] != 0) {
+                                    if (y >= N) {
+                                        isDown = false;
+                                    }
+                                    break;
+                                }
+                                y++;
+                            } else {
+                                if (y <= 1|| map[y - 1][x] != 0) {
+                                    if (y <= 1) {
+                                        isDown = true;
+                                    }
+                                    break;
+                                }
+                                y--;
+                            }
+                        }
+                    }
+                }
+                pw.println();
+                pw.println(j);
+            } else {
+                pw.println("2 " + i + " 1 " + i + " 2");
+                map[i][1] = 1;
+                map[i][2] = 1;
+            }
         }
-        
-        for (int i = N - 1; i >= 0; i--) {
-            
-        }
-        
         
     }    
 
@@ -102,7 +143,7 @@ public class D {
   }
     static long startTime;
     public static void main(String[] args) {
-        D app = new D();
+        C app = new C();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

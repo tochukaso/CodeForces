@@ -1,4 +1,5 @@
 
+
 import static java.util.Arrays.*;
 import static java.lang.Math.*;
 
@@ -16,32 +17,21 @@ public class A {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
-
-        int N = readBufInt();
-        int V = readBufInt();
-        List<Integer> seller = new ArrayList<Integer>();
-        for (int i = 1; i <= N; i++) {
-            int[] prices = readIntArray();
-            for (int j = 1; j < prices.length; j++) {
-                int price = prices[j];
-                if (V > price) {
-                    seller.add(i);
-                    break;
+        
+        char[] c = br.readLine().toCharArray();
+        
+        boolean[] used = new boolean[30];
+        int sum = 0;
+        
+        for (char x : c) {
+            if (x >= 'a' && x <= 'z') {
+                if (!used[x - 'a']) {
+                    used[x - 'a'] = true;
+                    sum++;
                 }
             }
         }
-        
-        pw.println(seller.size());
-        for (int i = 0; i < seller.size(); i++) {
-            if (i == seller.size() - 1) {
-                pw.println(seller.get(i));
-            } else {
-                pw.print(seller.get(i) + " ");
-            }
-        }
-        if (seller.size() == 0) {
-            pw.println();
-        }
+        pw.println(sum);
         
     }    
 
@@ -100,7 +90,7 @@ public class A {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }

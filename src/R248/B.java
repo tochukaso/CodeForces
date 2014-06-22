@@ -1,4 +1,4 @@
-
+package R248;
 
 import static java.util.Arrays.deepToString;
 
@@ -7,34 +7,39 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 import java.util.StringTokenizer;
  
-public class D {
+public class B {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
-
-        Scanner sc = new Scanner(System.in);
         
-        int N = sc.nextInt();
+        int N = readBufInt();
+        int V = readBufInt();
         
-        double[] p = new double[N];
-        
-        Arrays.sort(p);
-        
-        double res = p[N - 1];
-        if (res >= 0.5d) {
-            pw.println(res);
+        int[] fruits = new int[3005];
+        for (int i = 0; i < N; i++) {
+            int[] line = readIntArray();
+            fruits[line[0]] += line[1];
         }
         
-        for (int i = N - 1; i >= 0; i--) {
-            
+        int sum = 0;
+        for (int i = 1; i <= 3002; i++) {
+            int beforeDay = fruits[i - 1];
+            if (beforeDay >= V) {
+                sum += V;
+            } else {
+                sum += beforeDay;
+                int toDay = Math.min(V - beforeDay, fruits[i]);
+                sum += toDay;
+                fruits[i] -=toDay;
+            }
         }
-        
+        pw.println(sum);
         
     }    
 
@@ -102,7 +107,7 @@ public class D {
   }
     static long startTime;
     public static void main(String[] args) {
-        D app = new D();
+        B app = new B();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

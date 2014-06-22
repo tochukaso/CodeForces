@@ -1,45 +1,42 @@
 
-import static java.util.Arrays.deepToString;
+
+import static java.util.Arrays.*;
+import static java.lang.Math.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
  
 public class B {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
-        startTime = System.currentTimeMillis();
-        
-        int N = readBufInt();
-        int V = readBufInt();
-        
-        int[] fruits = new int[3005];
+        char[] c = br.readLine().toCharArray();
+        int K = readInt();
+        int N = c.length;
+        int max = 0;
         for (int i = 0; i < N; i++) {
-            int[] line = readIntArray();
-            fruits[line[0]] += line[1];
-        }
-        
-        int sum = 0;
-        for (int i = 1; i <= 3002; i++) {
-            int beforeDay = fruits[i - 1];
-            if (beforeDay >= V) {
-                sum += V;
-            } else {
-                sum += beforeDay;
-                int toDay = Math.min(V - beforeDay, fruits[i]);
-                sum += toDay;
-                fruits[i] -=toDay;
+            for (int j = 2; i + j <= N + K; j+=2) {
+                boolean isFalse = false;
+                for (int k = 0; k < j / 2; k++) {
+                    if (i + j / 2 + k < N) {
+                        if (c[i + k] != c[i + j / 2 + k ]) {
+                            isFalse = true;
+                            break ;
+                        }
+                    }
+                }
+                if (!isFalse) {
+                    max = max(max, j);
+                }
             }
         }
-        pw.println(sum);
-        
+        pw.println(max);
     }    
 
     

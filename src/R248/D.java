@@ -1,43 +1,66 @@
+package R248;
 
-
-import static java.util.Arrays.deepToString;
+import static java.util.Arrays.*;
+import static java.lang.Math.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.StringTokenizer;
  
 public class D {
     private static final boolean isDebug = false;
 
+    int rnd = 1;
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
 
-        Scanner sc = new Scanner(System.in);
-        
-        int N = sc.nextInt();
-        
-        double[] p = new double[N];
-        
-        Arrays.sort(p);
-        
-        double res = p[N - 1];
-        if (res >= 0.5d) {
-            pw.println(res);
+        int x = readBufInt();
+        int k = readBufInt();
+        int p = readBufInt();
+
+        long sum = 0;
+        int cnt = 100;
+        for (int i = 0; i < cnt; i++) {
+            sum+=calc(x,k,p);
         }
+        BigDecimal s = new BigDecimal(sum).divide(new BigDecimal(cnt), 15,RoundingMode.HALF_EVEN);
         
-        for (int i = N - 1; i >= 0; i--) {
-            
-        }
-        
-        
+        pw.println(s);
     }    
 
+    int calc (int x, int k, int p) {
+        //input: integers x, k, p
+        double a = x;
+        int s = 0;
+
+        for(int step = 1; step <= k; step = step + 1){
+            
+            rnd++;
+            if (rnd == 101) {
+                rnd = 1;
+            }
+
+            if(rnd <= p)
+                a = a * 2;
+            else
+                a = a + 1;
+        }
+
+
+        while (a % 2 == 0){
+            a = a / 2;
+            s = s + 1;
+        }
+
+        return s;
+    }
     
     private static long gcd(long n1, long n2) {
         return (n2 == 0)?n1:gcd(n2, n1%n2);

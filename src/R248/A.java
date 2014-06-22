@@ -1,3 +1,4 @@
+package R248;
 
 import static java.util.Arrays.*;
 import static java.lang.Math.*;
@@ -11,12 +12,37 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
  
-public class Main {
+public class A {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
 
+        int N = readBufInt();
+        int V = readBufInt();
+        List<Integer> seller = new ArrayList<Integer>();
+        for (int i = 1; i <= N; i++) {
+            int[] prices = readIntArray();
+            for (int j = 1; j < prices.length; j++) {
+                int price = prices[j];
+                if (V > price) {
+                    seller.add(i);
+                    break;
+                }
+            }
+        }
+        
+        pw.println(seller.size());
+        for (int i = 0; i < seller.size(); i++) {
+            if (i == seller.size() - 1) {
+                pw.println(seller.get(i));
+            } else {
+                pw.print(seller.get(i) + " ");
+            }
+        }
+        if (seller.size() == 0) {
+            pw.println();
+        }
         
     }    
 
@@ -84,7 +110,7 @@ public class Main {
   }
     static long startTime;
     public static void main(String[] args) {
-        Main app = new Main();
+        A app = new A();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();
