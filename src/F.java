@@ -1,5 +1,6 @@
 
 
+
 import static java.util.Arrays.*;
 import static java.lang.Math.*;
 
@@ -17,7 +18,7 @@ public class F {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
-
+        
         
     }    
 
@@ -76,7 +77,7 @@ public class F {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }

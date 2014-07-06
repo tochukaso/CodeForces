@@ -1,8 +1,7 @@
+package R253;
 
 
-
-import static java.util.Arrays.*;
-import static java.lang.Math.*;
+import static java.util.Arrays.deepToString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,13 +10,31 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
  
-public class B {
+public class D {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
+
+        Scanner sc = new Scanner(System.in);
+        
+        int N = sc.nextInt();
+        
+        double[] p = new double[N];
+        
+        Arrays.sort(p);
+        
+        double res = p[N - 1];
+        if (res >= 0.5d) {
+            pw.println(res);
+        }
+        
+        for (int i = N - 1; i >= 0; i--) {
+            
+        }
         
         
     }    
@@ -77,7 +94,7 @@ public class B {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }
@@ -86,7 +103,7 @@ public class B {
   }
     static long startTime;
     public static void main(String[] args) {
-        B app = new B();
+        D app = new D();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

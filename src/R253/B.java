@@ -1,4 +1,4 @@
-
+package R253;
 
 
 import static java.util.Arrays.*;
@@ -17,9 +17,27 @@ public class B {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
-        startTime = System.currentTimeMillis();
-        
-        
+        char[] c = br.readLine().toCharArray();
+        int K = readInt();
+        int N = c.length;
+        int max = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 2; i + j <= N + K; j+=2) {
+                boolean isFalse = false;
+                for (int k = 0; k < j / 2; k++) {
+                    if (i + j / 2 + k < N) {
+                        if (c[i + k] != c[i + j / 2 + k ]) {
+                            isFalse = true;
+                            break ;
+                        }
+                    }
+                }
+                if (!isFalse) {
+                    max = max(max, j);
+                }
+            }
+        }
+        pw.println(max);
     }    
 
     
@@ -77,7 +95,7 @@ public class B {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }

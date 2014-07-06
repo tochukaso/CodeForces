@@ -1,4 +1,4 @@
-
+package R253;
 
 
 import static java.util.Arrays.*;
@@ -15,10 +15,45 @@ import java.util.StringTokenizer;
  
 public class C {
     private static final boolean isDebug = false;
+    
+    int N = 0;
+
+    int min = Integer.MAX_VALUE;
+    String[] s = null;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
+
+        N = readBufInt();
+        s = readStrArray();
         
+        boolean[] colors = new boolean[5];
+        boolean[] numbers = new boolean[5];
+        
+        boolean[] cards = new boolean[26];
+        for(String card : s) {
+            char color = card.charAt(0);
+            int num = Character.getNumericValue(card.charAt(1));
+            
+            if (color == 'G') {
+                num += 5;
+            } else if (color == 'R') {
+                num += 10;
+            } else if (color == 'B') {
+                num += 15;
+            } else if (color == 'W') {
+                num += 20;
+            } 
+            cards[num] = true;
+        }
+        
+        while(true) {
+            int maxMatch = 0;
+            for (int i = 1; i < 26; i++) {
+                
+            }
+            
+        }
         
     }    
 
@@ -77,7 +112,7 @@ public class C {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }
@@ -113,5 +148,74 @@ public class C {
    BufferedReader br = null;
    static PrintWriter pw = new PrintWriter(System.out);
    
+   void permutationAll(int[] p) {
+       permutation(p, 0, p.length - 1);
+    }
+   
+   void permutationRange(int from, int to) {
+       int cnt = to - from + 1;
+       int[] elements = new int[cnt];
+       for (int i = 0 ; i <  cnt; i++) elements[i] = from++;
+       permutation(elements, 0, cnt - 1);
+   }
+
+   void permutationString(String element) {
+       char[] elements = element.toCharArray();
+       permutationString(elements, 0, elements.length - 1);
+   }
+
+   
+   void permutation(int[] elements, int nowCnt, int totalCnt) {
+       if (nowCnt == totalCnt) { 
+           int sum = 0;
+           boolean[] colors = new boolean[5];
+           boolean[] numbers = new boolean[5];
+           
+           boolean[] checked = new boolean[N];
+           
+           for (int i = 0; i < elements.length; i++) {
+               if (i <= 5) {
+                   numbers[i - 1] = true;
+               } else {
+                   colors[i - 6] = true;
+               }
+               
+               for (int j = 0; j < N; j++) {
+                   
+               }
+           }
+           
+           // TODO insertCode
+       } else {
+           
+         for (int i = nowCnt; i <= totalCnt; i++) {
+           int tmp = elements[nowCnt]; 
+           elements[nowCnt] = elements[i]; 
+           elements[i] = tmp;
+           permutation(elements, nowCnt+1, totalCnt);
+           tmp = elements[nowCnt]; 
+           elements[nowCnt] = elements[i]; 
+           elements[i] = tmp;
+         }
+       }
+    }
+
+   void permutationString(char[] elements, int nowCnt, int totalCnt) {
+       if (nowCnt == totalCnt) { 
+           
+           // TODO insertCode
+       } else {
+           
+         for (int i = nowCnt; i <= totalCnt; i++) {
+           char tmp = elements[nowCnt]; 
+           elements[nowCnt] = elements[i]; 
+           elements[i] = tmp;
+           permutationString(elements, nowCnt+1, totalCnt);
+           tmp = elements[nowCnt]; 
+           elements[nowCnt] = elements[i]; 
+           elements[i] = tmp;
+         }
+       }
+    }
 
 }

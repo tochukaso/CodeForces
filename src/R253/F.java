@@ -1,4 +1,4 @@
-
+package R253;
 
 
 import static java.util.Arrays.*;
@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
  
-public class B {
+public class F {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
-        
+
         
     }    
 
@@ -77,7 +77,7 @@ public class B {
     private final String[] readStrArray() throws IOException {
 //      String[] s = br.readLine().split(" ");
       List<String> res = new ArrayList<String>();
-      StringTokenizer st = new StringTokenizer(br.readLine(), ", ");
+      StringTokenizer st = new StringTokenizer(br.readLine(), " ");
       while (st.hasMoreTokens()) {
           res.add(st.nextToken());
       }
@@ -86,7 +86,7 @@ public class B {
   }
     static long startTime;
     public static void main(String[] args) {
-        B app = new B();
+        F app = new F();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

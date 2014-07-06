@@ -1,15 +1,16 @@
-
-
-import static java.util.Arrays.*;
-import static java.lang.Math.*;
+import static java.util.Arrays.deepToString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
  
 public class A {
@@ -17,24 +18,19 @@ public class A {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
-        
-        char[] c = br.readLine().toCharArray();
-        
-        boolean[] used = new boolean[30];
-        int sum = 0;
-        
-        for (char x : c) {
-            if (x >= 'a' && x <= 'z') {
-                if (!used[x - 'a']) {
-                    used[x - 'a'] = true;
-                    sum++;
-                }
-            }
-        }
-        pw.println(sum);
-        
-    }    
 
+    }    
+    
+
+    char[][] copyArray(char[][] original) {
+        
+        char[][] res = new char[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            res[i] = Arrays.copyOf(original[i], original[i].length);
+        }
+        
+       return res; 
+    }
     
     private static long gcd(long n1, long n2) {
         return (n2 == 0)?n1:gcd(n2, n1%n2);

@@ -1,4 +1,4 @@
-
+package R253;
 
 
 import static java.util.Arrays.*;
@@ -13,12 +13,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
  
-public class B {
+public class A {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
         
+        char[] c = br.readLine().toCharArray();
+        
+        boolean[] used = new boolean[30];
+        int sum = 0;
+        
+        for (char x : c) {
+            if (x >= 'a' && x <= 'z') {
+                if (!used[x - 'a']) {
+                    used[x - 'a'] = true;
+                    sum++;
+                }
+            }
+        }
+        pw.println(sum);
         
     }    
 
@@ -86,7 +100,7 @@ public class B {
   }
     static long startTime;
     public static void main(String[] args) {
-        B app = new B();
+        A app = new A();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();
