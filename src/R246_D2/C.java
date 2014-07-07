@@ -30,7 +30,7 @@ public class C {
 
             int N = readInt();
 
-            // �\�[�g��̕��я�
+            // ソート後の並び順
             int[][] a = new int[N][];
             for(int i = 0;i < N;i++){
                 a[i] = new int[]{readMinInt(), i};
@@ -44,7 +44,7 @@ public class C {
 
             System.out.println("--------");
 
-            // ���݂̕��я�
+            // 現在の並び順
             int[] ia = new int[N];
             for(int i = 0;i < N;i++)ia[a[i][1]] = i;
             List<String> lines = new ArrayList<String>();
@@ -55,13 +55,13 @@ public class C {
 
             for(int i = 0;i < N;i++){
                 
-                // �\�[�g��̕��я���i�Ԗڂ̌��݂̈ʒu
+                // ソート後の並び順のi番目の現在の位置
                 int x = a[i][1];
                 while(x > i){
-                    // x���\�[�g��̕��я���i�Ԗڂ̈ʒu���傫���ꍇ�Ƀ��[�v�����𑱂���B
+                    // xがソート後の並び順のi番目の位置より大きい場合にループ処理を続ける。
                     
-                    // �\�[�g��̕��я��̌��݈ʒu�ƁA���݊m�肷��ׂ��ꏊ�̈ʒu�̍����Ƃ�A
-                    // �f���^�̉��Ԗڂ̈ʒu�ɓ����ׂ������l����
+                    // ソート後の並び順の現在位置と、現在確定するべき場所の位置の差をとり、
+                    // 素数豹の何番目の位置に入れるべきかを考える
                     int ind = Arrays.binarySearch(primes, x-i+1);
 
                     System.out.print(" x = " + x);
