@@ -18,8 +18,27 @@ public class B {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
+        String S = br.readLine();
+        int K = readBufInt();
+        int[] a = readIntArray();
+        
+        int sum = 0;
+        int max = 0;
+        char[] sA = S.toCharArray();
+        for (int i = 0; i < sA.length; i++) {
+            char c = sA[i];
+            sum += a[c - 'a'] * (i + 1);
+        }
+        
+        for (int i : a) {
+            max = Math.max(max, i);
+        }
+        for (int i = 1; i <= K; i++) {
+            sum += (i + sA.length) * max; 
+        }
         
         
+        pw.println(sum);
     }    
 
     

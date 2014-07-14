@@ -1,16 +1,15 @@
 
 
 
-import static java.util.Arrays.*;
-import static java.lang.Math.*;
+import static java.util.Arrays.deepToString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
  
 public class C {
@@ -18,10 +17,66 @@ public class C {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
+        int N = readBufInt();
+        int[] arr = readIntArray();
         
-        
+        if (N < 3) {
+            pw.println(N);
+            return;
+        }
+        shakutori(N, arr);
     }    
 
+    static void shakutori (int N, int[] arr) {
+        int[] subsequence = new int[arr.length + 1];
+        System.arraycopy(arr, 0, subsequence, 0, arr.length);
+        subsequence[arr.length] = -1;
+        
+        int to = 0;
+        int before = 0;
+        int[] dp = new int[N + 1];
+        int length = 0;
+        for (; to <= N; to++) {
+            int now = subsequence[to];
+            
+            if(before < now) {
+                length++;
+            } else {
+                for (int i = 0; i <= length; i++) {
+                    dp[to - i] = length;
+                }
+                length = 1;
+            }
+
+            dp[to] = length;
+            before = now;
+        }
+        dp[N] = 0;
+//        for (int i = 0; i < N; i++) {
+//            System.out.println(dp[i]);
+//        }
+        
+        int max = 0;
+        for (int i = 1; i < N - 1; i++) {
+            int x = 0;
+            if(dp[i + 1] == 1 && subsequence[i] + 1< subsequence[i + 2]) {
+                x = dp[i] + dp[i + 2] + 1;
+            }
+            if (subsequence[i] > subsequence[i - 1] && subsequence[i] >= subsequence[i+1] ) {
+                if(subsequence[i] + 1 < subsequence[i + 2]) {
+                    x = Math.max(x, dp[i] + dp[i + 1]);
+                }
+                if (subsequence[i - 1] + 1 < subsequence[i + 1]) {
+                    x = Math.max(x, dp[i] + dp[i + 1]);
+                }
+            }
+            x = Math.max(x, dp[i] + 1);
+            
+            max = Math.max(max, x);
+        }
+        
+        pw.println(Math.min(N, max));
+    }
     
     private static long gcd(long n1, long n2) {
         return (n2 == 0)?n1:gcd(n2, n1%n2);

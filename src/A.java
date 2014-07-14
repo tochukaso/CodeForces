@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +16,20 @@ public class A {
 
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
+        
+        Set<Integer> table = new HashSet<Integer>();
+
+        int P = readBufInt();
+        int N = readBufInt();
+        for (int i = 1; i <= N; i++) {
+            if(!table.add(readBufInt() % P)) {
+                pw.println(i);
+                return;
+            }
+        }
+        
+        pw.println("-1");
+       
 
     }    
     

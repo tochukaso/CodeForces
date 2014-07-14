@@ -19,9 +19,94 @@ public class D {
     void solve() throws Throwable {
         startTime = System.currentTimeMillis();
         
+        int N = readBufInt();
+        int M = readBufInt();
+        int K = readBufInt();
+        int P = readBufInt();
+        
+        int[][] array = new int[N][];
+        for (int i = 0; i < N; i++) {
+            array[i] = readIntArray();
+        }
+        
+        int[] line = new int[N];
+        int[] colum = new int[M];
+        for (int i = 0; i < N; i++) {
+            int s = 0;  
+            for (int j = 0; j < M; j++) {
+                s += array[i][j];
+            }
+            line[i] = s;
+        }
+        
+        for (int i = 0; i < M; i++) {
+            int s = 0;
+            for (int j = 0; j < N; j++) {
+                s += array[j][i];
+            }
+            colum[i] = s;
+        }
+        
+        Arrays.sort(line);
+        Arrays.sort(colum);
+        
+        int lineM = line[N - 1];
+        int columM = colum[M - 1];
+        int sum = 0;
+        
+        int mCnt = 0;
+        int cCnt = 0;
+                
+        for (int i = 0; i < K; i++) {
+            int nLine = lineM - cCnt * P;
+            int nColum = columM - mCnt * P;
+
+            int t = 0;
+            if (nLine > nColum) {
+                t = nLine;
+                lineM -= P * M;
+                int index = binarySearch(lineM, N, line);
+                
+                for (int j = N - 1; j > index; j--) {
+                    line[j] = line[j-1];
+                }
+                line[index] = lineM;
+                mCnt++;
+                lineM = line[N - 1];
+            } else {
+                t = nColum;
+                columM -= P * N;
+                int index = binarySearch(columM, M, colum);
+                
+                for (int j = M - 1; j > index; j--) {
+                    colum[j] = colum[j-1];
+                }
+                colum[index] = columM;
+                cCnt++;
+                columM = colum[M - 1];
+            }
+            
+            sum+=t;
+        }
+
+        pw.println(sum);
         
     }    
 
+    public static int binarySearch(int num, int N, int[] list) {
+        int max = N;
+        int min = 0;
+        while(min + 1 < max) {
+            int now = (max + min) / 2;
+            if (list[now] > num) {
+                max = now;
+            } else {
+                min = now;
+            }
+        }
+        
+        return min;
+    }
     
     private static long gcd(long n1, long n2) {
         return (n2 == 0)?n1:gcd(n2, n1%n2);
