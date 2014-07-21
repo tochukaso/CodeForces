@@ -1,3 +1,4 @@
+package R257;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,11 +14,26 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class B {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        startTime = System.currentTimeMillis();
         
+        int x = readInt();
+        int y = readInt();
+        int n = readInt();
+        
+        int f3 = y - x;
+        int s = f3 - y;
+
+        int t = (int) ((long)s * (n - 2) + y) % 1000000007;
+        
+        if(t < 0) {
+            t += 1000000007;
+        }
+        
+        pw.println(t);
         
     }    
     
@@ -42,7 +58,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        B app = new B();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

@@ -1,3 +1,4 @@
+package R256;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,14 +14,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class F {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
-        
-        
+        startTime = System.currentTimeMillis();
     }    
-    
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
@@ -42,7 +41,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        F app = new F();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

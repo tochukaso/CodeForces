@@ -1,3 +1,4 @@
+package R256;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,14 +14,36 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class A {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        int[] a = readIntArray();
+        int[] b = readIntArray();
+        int N = readInt();
         
+        int aS = 0;
+        for (int aN  : a) {
+            aS += aN; 
+        }
         
+        int bS = 0;
+        for (int i : b) {
+            bS += i;
+        }
+        
+        N -= aS / 5;
+        if (aS % 5 != 0) N--;
+        
+        N -= bS / 10;
+        if (bS % 10 !=0) N--;
+        
+        if(N >=0) {
+            pw.println("YES");
+        } else {
+            pw.println("NO");
+        }
     }    
-    
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
@@ -42,7 +65,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        A app = new A();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

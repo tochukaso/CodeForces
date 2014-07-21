@@ -1,3 +1,4 @@
+package R256;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,19 +14,51 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class D {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        startTime = System.currentTimeMillis();
         
+        int n = readInt();
+        int m = readInt();
+        int k = readInt();
+        long max = Math.min(k, Math.max(n, m));
+       
+        
+        
+        {
+            long num = k;
+            for (long i = 1; i <= n && num > 0; i++) {
+                if(num > m) {
+                    max = Math.max(max, m * i);
+                } else {
+                    max = Math.max(max, num * i);
+                }
+                num -= m;
+            }
+//                } else {
+        }
+        
+//        {
+//            int num = k;
+//            for (int i = 1; i <= m && num > 0; i++) {
+//                if(num > n) {
+//                    max = Math.max(max, n * i);
+//                    max = Math.max(max, num * i);
+//                }
+//                num -= n;
+//            }
+//        }
+
+        pw.println(max);
         
     }    
-    
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
-    }
 
+    }
     final void printArray(double[] p) {
         for (double i : p) System.out.print(i + " ");
         System.out.println();
@@ -42,7 +75,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        D app = new D();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

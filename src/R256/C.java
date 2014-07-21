@@ -1,3 +1,5 @@
+package R256;
+
 
 import static java.util.Arrays.deepToString;
 
@@ -7,20 +9,102 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
-public class E {
+public class C {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        int N = readInt();
+        int[] a = new int[N + 2];
+        for (int i = 0; i < N; i++) {
+            a[i+1] = readInt();
+        }
         
+        int[] dp = new int[N + 2];
+        Arrays.fill(dp, 100000);
+        dp[0] = 0;
+        
+        for (int i = 1; i <= N + 1; i++) {
+            int minH = Integer.MAX_VALUE;
+            for (int j = i - 1; j >= 0; j--) {
+                minH = Math.min(minH,  a[j]);
+                int p = Math.max(0, a[i] - minH);
+                dp[i] = Math.min(dp[i], dp[j] + i-j-1 + p);
+//                System.out.println(i + " " + j + " " + dp[i]);
+            }
+            System.out.println(dp[i]);
+        }
+        
+//        pw.println(dp[N+1]);
+                
+        
+        
+//        int max = N;
+
+//        TreeMap<Integer,Integer> map = new TreeMap<Integer,Integer>();
+//        TreeMap<Integer,List<Integer>> mapC = new TreeMap<Integer,List<Integer>>();
+//        TreeMap<Integer,Integer> mapX = new TreeMap<Integer,Integer>();
+//        TreeMap<Integer,Integer> mapCZ = new TreeMap<Integer,Integer>();
+//        
+//        for (int i : a) {
+//            int x = 0;
+//            if (map.containsKey(i)) {
+//                x = map.get(i);
+//            }
+//            x++;
+//            map.put(i, x);
+//        }
+//        for (int i : map.keySet()) {
+//            List<Integer> list = new ArrayList<Integer>();
+//            int count = 0;
+//            boolean isCall = false;
+//            boolean isFirst = false;
+//            for (int j : a) {
+//                if(j < i) {
+//                    list.add(count);
+//                    count = 0;
+//                } else {
+//                    count++;
+//                }
+//            }
+//            if(count !=0) {
+//                list.add(count);
+//            }
+//            mapC.put(i, list);
+//        }
+//
+//        { 
+//        int sum = 0;
+//        for (int i : map.keySet()) {
+//            sum += map.get(i) ;
+//            mapX.put(i, sum);
+//        }
+//        }
+//
+//        int before = 0;
+//        for (int i : map.keySet()) {
+//            int sum = mapX.get(i);
+//            List<Integer> list = mapC.get(i);
+//            int now = before + N - sum;
+//            int sa = i - before;
+//            int count = 0;
+//            for (Integer integer : list) {
+//                System.out.println(integer);
+//                count += (Math.min(sa, integer));
+//            }
+//            int cZ = 0;
+//            mapCZ.put(i, count);
+//            System.out.println(i + " " + before + " " +  mapC.get(i) + " " + N + " " + sum + " " + now);
+//            max = Math.min(max, now);
+//            before = i;
+//        }
+//        
+//        pw.println(max);
         
     }    
-    
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
@@ -42,7 +126,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        C app = new C();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

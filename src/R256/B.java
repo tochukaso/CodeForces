@@ -1,3 +1,4 @@
+package R256;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,14 +14,59 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class B {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        String s = readLine();
+        String t = readLine();
         
+        int[] sA = new int[27];
+        int[] tA = new int[27];
+        for (char c : s.toCharArray()) {
+            sA[c-'a']++;
+        }
+        for (char c : t.toCharArray()) {
+            tA[c-'a']++;
+        }
         
+        boolean isAutoMaton = false;
+        for (int i = 0; i < 27; i++) {
+            if(sA[i] > tA[i]) {
+                isAutoMaton = true;
+            } else if (sA[i] < tA[i]) {
+                pw.println("need tree");
+                return;
+            }
+        }
+        
+        char[] sX = s.toCharArray();
+        char[] tX = t.toCharArray();
+            
+        int[][] dp = new int[s.length() + 1][t.length() + 1];
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; j < t.length(); j++) {
+                if(sX[i] == tX[j]) {
+                    dp[i+1][j+1] = dp[i][j] + 1;
+                } else {
+                    dp[i+1][j+1] = Math.max(dp[i+1][j], dp[i][j+1]);
+                }
+            }
+        }
+        
+        boolean isArray = false;
+        if(dp[s.length()][t.length()] != t.length()) {
+            isArray = true;
+        }
+        
+        if(isAutoMaton && isArray) {
+            pw.println("both");
+        } else if (isAutoMaton) {
+            pw.println("automaton");
+        } else if (isArray) {
+            pw.println("array");
+        }
     }    
-    
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
@@ -42,7 +88,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        B app = new B();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

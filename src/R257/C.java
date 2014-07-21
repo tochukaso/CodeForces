@@ -1,3 +1,4 @@
+package R257;
 
 import static java.util.Arrays.deepToString;
 
@@ -7,20 +8,102 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
-public class E {
+public class C {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        startTime = System.currentTimeMillis();
+        
+        int n = readInt();
+        int m = readInt();
+        int k = readInt();
+        
+        if(k > (n + m - 2)) {
+            pw.println(-1);
+            return;
+        }
+        
+        
+
+//        long max = (long) n * m;
+        long min = 1;
+        
+        int mMin = Math.max(0,k - (n - 1));
+//        System.out.println(mMin);
+        
+//        long[] dp = new long[k - mMin];
+//        while(min + 1 < max) {
+            
+//            long now = (min + max) / 2;
+            
+//            boolean isClear = false;
+            for (int i = mMin; i <= (n / 2) && k >= i; i++) {
+//            for (int i = mMin; i <= n - 1 && k >= i; i++) {
+//                long t = 0;
+//                if (dp[i] != 0) {
+//                    t = dp[i];
+//                } else {
+                    int y = n;
+                    int last = k - i + 1;
+                    if(i > 0) {
+                        if (i == n / 2) {
+                            y = 1;
+                            last = k - i * 2  + 1;
+                        } else {
+                            y = n / (i + 1);
+                        }
+                    }
+                    if(y <= min) continue;
+                    int x = m;
+                    if(k - i > 0) {
+                        x = m / last;
+                    }
+                    
+//                    dp[i] = x * y;
+//                    t = x * y;
+//                }
+                
+                min = Math.max(min, x * y);
+
+                
+//                if (t >= now) {
+//                    isClear = true;
+//                    break;
+//                }
+            }
+            
+            
+//            if(isClear) {
+//                min = now;
+//            } else {
+//                max = now;
+//            }
+            
+//        }
+
+        pw.println(min);
         
         
     }    
-    
+
+    public static int binarySearch(int num, int[] list) {
+        int max = list.length;
+        int min = 0;
+        while(min + 1 < max) {
+            int now = (max + min) / 2;
+            if (list[now] > num) {
+                max = now;
+            } else {
+                min = now;
+            }
+        }
+        
+        return min;
+    }
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);
@@ -42,7 +125,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        C app = new C();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();

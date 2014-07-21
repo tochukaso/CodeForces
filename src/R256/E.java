@@ -1,3 +1,4 @@
+package R256;
 
 import static java.util.Arrays.deepToString;
 
@@ -17,10 +18,33 @@ public class E {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
+        startTime = System.currentTimeMillis();
+        
+        int X = readInt();
+        
+        int K = readInt();
+        
         
         
     }    
-    
+
+    static List<Integer> searchFactor(int n) {
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(n);
+        if(n == 1) return list;
+        list.add(1);
+      
+        int length = (int) Math.sqrt(n);
+        for (int i = 2; i <= length; i++) {
+            if(n % i == 0) {
+                list.add(i);
+                if (n / i != i) {
+                    list.add(n / i);
+                }
+            }
+        }
+        return list; 
+    }
 
     final void printMatrix(double[][] p) {
         for (double[] i : p) printArray(i);

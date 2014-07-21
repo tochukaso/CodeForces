@@ -1,3 +1,4 @@
+package R257;
 
 import static java.util.Arrays.deepToString;
 
@@ -13,12 +14,30 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class E {
+public class A {
     private static final boolean isDebug = false;
 
     void solve() throws Throwable {
-        
-        
+        int n = readInt();
+        int m = readInt();
+        int[] c = readIntArray();
+        int index = 0;
+        while(true) {
+            boolean isC = false;
+            int i = 0;
+            for (; i < n ; i++) {
+                if(c[i] <= 0) {
+                    continue;
+                }
+                c[i] -= m;
+                index = i;
+                isC = true;
+            }
+            if(!isC) {
+                pw.println(index + 1);
+                return;
+            }
+        }
     }    
     
 
@@ -42,7 +61,7 @@ public class E {
 
     static long startTime;
     public static void main(String[] args) {
-        E app = new E();
+        A app = new A();
         try {
             app.br = new BufferedReader(new InputStreamReader(System.in));
             app.solve();
